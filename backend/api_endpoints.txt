@@ -1,0 +1,10 @@
+GET /students -> Gets all the students info
+POST /students -> Creates new student info
+
+GET /students/:id -> Gets a single student
+GET /students/:id  -> Deletes a single student
+PATCH /students/:id -> Updates a single student
+
+GET /students/:id/violations -> Gets a student's violations
+POST /students/:id/violations -> Creates a new violation on student
+

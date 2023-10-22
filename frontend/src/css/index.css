@@ -1,0 +1,41 @@
+:root {
+  --uscgreen: #00A950;
+  --uscblue: #009DDC;
+  --uscred: #EE2E24;
+  --uscyellow: #FFC423;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  transition: 0.2s;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+body {
+  background-color: #ffffff;
+  opacity: 0.8;
+  background-image: linear-gradient(#fafafa 2px, transparent 2px),
+      linear-gradient(90deg, #fafafa 2px, transparent 2px),
+      linear-gradient(#fafafa 1px, transparent 1px),
+      linear-gradient(90deg, #fafafa 1px, #ffffff 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
