@@ -1,9 +1,80 @@
-const StudentView = () => {
+import "./../css/studentview.css"
+import { Link } from "react-router-dom"
+import { useStudentsContext } from "./../hooks/useStudentsContext"
+import { useEffect } from "react"
+import { StudentsContext } from "../context/StudentsContext"
+
+const StudentDetails = ({student}) => {
     return (
-        <p> Hello World </p>
+        <Link to={"/students/"+student._id} style={{textDecoration: 'none', color: 'black'}}>
+            <div className="students-details">
+                <h3>{student.studentName}</h3>
+                <p><strong>Student ID: </strong>{student.studentID}</p>
+                <p><strong>MongoDB ID: </strong>{student._id}</p>
+            </div>
+        </Link>
+    )
+
+}
+const StudentView = () => {
+    const { students, dispatch } = useStudentsContext()
+
+    useEffect(() => {
+      const fetchStudents = async () => {
+        const response = await fetch('/api/students')
+        const json = await response.json()
+  
+        if (response.ok) {
+            console.log("Database Response OK")
+          dispatch({type: 'SET_STUDENTS', payload: json})
+        } else {
+            console.log("Database Response NOT OK")
+        }
+      }
+  
+      fetchStudents()
+    }, [dispatch])
+
+    return (
+        <div className="student-view-wrapper">
+            <div className="student-navigation">
+
+                <div className="student-search-container">
+                    <input className="student-search" type="text" placeholder="Search.."></input>
+                </div>
+                <div className="student-action-buttons">
+                    <Link to="/students/add" style={{textDecoration: 'none', color: 'black'}}>
+                        <div className="student-action-button" id="students-add-button">
+                            <i className="fa-solid fa-plus fa-2x"></i>  
+                        </div>
+                    </Link>
+                    <div className="student-action-button" id="students-sort-button">
+                            <i className="fa-solid fa-filter fa-2x"></i>  
+                    </div>
+                </div>
+
+                <div className="student-list">
+                    {students && students.map(student => (
+                        <StudentDetails student={student} key={student._id}></StudentDetails>
+                    ))}
+                </div>
+            </div>
+            <div className="student-browser">
+
+            </div>
+        </div>
+    )
+}
+
+const AddStudentModal = () => {
+    return (
+        <div className="add-student-modal">
+            <p> Hello World </p>
+        </div>
     )
 }
 
 export {
-    StudentView
+    StudentView,
+    AddStudentModal
 }

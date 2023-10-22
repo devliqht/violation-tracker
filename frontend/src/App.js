@@ -15,14 +15,8 @@ function App() {
         <SideNavbar />
           <div className="content">
             <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route 
-                path="/students"
-                element={<StudentView />}
-              />
+              <Route path="/" element={<Home />}/>
+              <Route path="/students" element={<StudentView></StudentView>}/>
             </Routes>
           </div>
       </div>

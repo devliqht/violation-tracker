@@ -1,0 +1,47 @@
+.student-view-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.student-navigation {
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid #d9d9d9;
+}
+
+.student-search {
+    border: 2px solid var(--uscgreen);
+    padding: 16px;
+    margin: 10px;
+    width: 256px;
+}
+
+.student-action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin-left: 10px;
+}
+
+.student-action-button {
+    color: var(--uscblue);
+}
+
+.students-details {
+    background: #d9d9d969;
+    margin: 10px;
+    padding: 16px;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 8px;
+    border: 2px solid #d9d9d9d1;
+}
+
+.students-details:hover {
+    background: #d9d9d9f7;
+}
+
+.add-student-modal {
+    position: absolute;
+}
