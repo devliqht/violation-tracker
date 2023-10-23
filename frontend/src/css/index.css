@@ -39,3 +39,8 @@ code {
     monospace;
 }
 
+.view {
+  display: flex;
+  flex-direction: row;
+}
+
