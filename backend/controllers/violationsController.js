@@ -21,7 +21,25 @@ const createViolation = async (req, res) => {
     }
 }
 
+// DELETE a violation
+const deleteViolation = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such violation exists 1'})
+    }
+
+    const violation = await Violation.findOneAndDelete({_id: id})
+
+    if (!violation) {
+        return res.status(404).json({error: 'No such violation exists 2'})
+    }
+
+    res.status(200).json(violation)
+
+}
+
 module.exports = {
     getViolations,
-    createViolation
+    createViolation,
+    deleteViolation
 }

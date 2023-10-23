@@ -10,7 +10,8 @@ const {
 
 const {
     getViolations,
-    createViolation
+    createViolation,
+    deleteViolation
 } = require('../controllers/violationsController')
 
 const router = express.Router()
@@ -31,5 +32,7 @@ router.patch('/:id', updateStudent)
 router.get('/:id/violations', getViolations)
 
 router.post('/:id/violations', createViolation)
+
+router.delete('/:id/violations', deleteViolation)
 
 module.exports = router

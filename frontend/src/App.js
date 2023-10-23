@@ -8,10 +8,10 @@ import { StudentsContext } from './context/StudentsContext';
 import Home from './pages/home';
 import { TopNavbar, SideNavbar } from './components/navbar';
 import { StudentView } from './pages/StudentView';
-import { BrowserView } from './pages/browserView';
+import { BrowserView, AddModalBrowserView } from './pages/browserView';
 
 function App() {
-  const { students, dispatch } = useStudentsContext()
+  const { students, dispatchStudents } = useStudentsContext()
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -20,14 +20,14 @@ function App() {
 
       if (response.ok) {
           console.log("Database Response OK")
-        dispatch({type: 'SET_STUDENTS', payload: json})
+        dispatchStudents({type: 'SET_STUDENTS', payload: json})
       } else {
           console.log("Database Response NOT OK")
       }
     }
 
     fetchStudents()
-  }, [dispatch])
+  }, [dispatchStudents])
 
   return (
     <div className="App">
@@ -42,6 +42,7 @@ function App() {
                   {students && students.map(student => (
                     <Route path={"/students/"+student._id} element={<div className="view"><StudentView/><BrowserView student={student} key={student._id}/></div>}></Route>
                   ))} 
+                    <Route path="/students/add" element={<div className="view"><StudentView/><AddModalBrowserView/></div>}></Route>
             </Routes>
           </div>
       </div>

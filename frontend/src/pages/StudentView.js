@@ -3,21 +3,23 @@ import { Link } from "react-router-dom"
 import { useStudentsContext } from "./../hooks/useStudentsContext"
 import { useEffect } from "react"
 import { StudentsContext } from "../context/StudentsContext"
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const StudentDetails = ({student}) => {
     return (
         <Link to={"/students/"+student._id} style={{textDecoration: 'none', color: 'black'}}>
             <div className="students-details">
-                <h3>{student.studentName}</h3>
+                <h3 style={{'margin-bottom': '10px'}}>{student.studentName}</h3>
                 <p><strong>Student ID: </strong>{student.studentID}</p>
-                <p><strong>MongoDB ID: </strong>{student._id}</p>
+                <p><strong>Blocksection: </strong>{student.studentBlocksection}</p>
+                <p>{formatDistanceToNow(new Date(student.createdAt), { addSuffix: true })}</p>
             </div>
         </Link>
     )
 
 }
 const StudentView = () => {
-    const { students, dispatch } = useStudentsContext()
+    const { students, dispatchStudents } = useStudentsContext()
 
     useEffect(() => {
       const fetchStudents = async () => {
@@ -26,14 +28,14 @@ const StudentView = () => {
   
         if (response.ok) {
             console.log("Database Response OK")
-          dispatch({type: 'SET_STUDENTS', payload: json})
+          dispatchStudents({type: 'SET_STUDENTS', payload: json})
         } else {
             console.log("Database Response NOT OK")
         }
       }
   
       fetchStudents()
-    }, [dispatch])
+    }, [dispatchStudents])
 
     return (
         <div className="student-view-wrapper">

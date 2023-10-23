@@ -22,12 +22,12 @@ export const studentsReducer = (state, action) => {
 }
 
 export const StudentsContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(studentsReducer, { 
+  const [state, dispatchStudents] = useReducer(studentsReducer, { 
     students: null
   })
   
   return (
-    <StudentsContext.Provider value={{ ...state, dispatch }}>
+    <StudentsContext.Provider value={{ ...state, dispatchStudents }}>
       { children }
     </StudentsContext.Provider>
   )
