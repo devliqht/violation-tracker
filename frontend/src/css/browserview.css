@@ -17,6 +17,7 @@
 .student-info-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 .student-indicator {
     display: flex;
@@ -139,6 +140,7 @@
     padding: 10px;
     border-radius: 10px;
     margin: 20px;
+    width: 100%;
 }
 
 .violation-indicator {

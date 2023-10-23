@@ -58,7 +58,7 @@ const BrowserView = ({student}) => {
                     <div className="student-indicator">
                         <i className="fa-solid fa-user fa-2x"></i>  
                         <p className="side-title"> / {student._id}</p>
-                        <span className="material-symbols-outlined" onClick={studentDelete}>delete</span>
+                        <button className="button-3" onClick={studentDelete}>delete</button>
                     </div>
 
                     <i className="fa-solid fa-user fa-6x" style={{color: 'var(--uscblue)', margin: '16px'}}></i>  
@@ -99,7 +99,7 @@ const BrowserView = ({student}) => {
                                 <p><strong>Details: </strong>{violation.violationInfo}</p>
                                 <p><strong>Date issued: </strong>{violation.violationDate}</p>
                                 <p>{formatDistanceToNow(new Date(student.createdAt), { addSuffix: true })}</p>
-                                <button className="material-symbols-outlined" onclick={violationDelete()}>delete</button>
+                                <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
                             </div>
                         ))}
                     </div>
