@@ -1,0 +1,15 @@
+.home {
+    padding: 24px;
+}
+
+.title {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    font-size: 3em;
+}
+
+.home p {
+    font-family: 'Quicksand';
+    margin-top: 5px;
+    font-size: 1.5em;
+}
