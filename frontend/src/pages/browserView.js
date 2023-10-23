@@ -10,7 +10,7 @@ const BrowserView = ({student}) => {
         <div className="browser-view">
             <div className="student-indicator">
                 <i className="fa-solid fa-user fa-2x"></i>  
-                <p className="side-title">Students / {student.studentName} ({student._id})</p>
+                <p className="side-title"> / {student.studentName} ({student._id})</p>
             </div>
         </div>
     )
