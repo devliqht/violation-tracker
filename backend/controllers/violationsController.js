@@ -10,11 +10,11 @@ const getViolations = async (req, res) => {
 
 // POST a new violation to a student
 const createViolation = async (req, res) => {
-    const {violationName, violationInfo, violationDate} = req.body
+    const {violationName, violationInfo, violationDate, violationStudentID} = req.body
 
     // Add Violation to Database
     try {
-        const violation = await Violation.create({violationName, violationInfo, violationDate})
+        const violation = await Violation.create({violationName, violationInfo, violationDate, violationStudentID})
         res.status(200).json(violation)
     } catch (error) {
         res.status(400).json({error: error.message})

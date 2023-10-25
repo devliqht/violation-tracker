@@ -135,7 +135,7 @@ const AddModalBrowserView = () => {
         event.preventDefault();
         //JSON.stringify([{violationData}]);
         const studentData = { studentName, studentID, studentBlocksection };
-        const violationData = { violationName, violationInfo, violationDate }
+        let violationStudentID = studentID;
 
         const response = await fetch('/api/students', {
           method: 'POST',
@@ -151,10 +151,9 @@ const AddModalBrowserView = () => {
           setEmptyFields([])
           setError(null)
           setStudentName('')
-          setStudentID(0)
           setStudentBlockSection('')
           dispatchStudents({type: 'CREATE_STUDENT', payload: json})
-
+          const violationData = { violationName, violationInfo, violationDate, violationStudentID }
 
           let idToBeStored = json._id;
           const response = await fetch("/api/students/"+idToBeStored+"/violations", {
@@ -164,7 +163,7 @@ const AddModalBrowserView = () => {
           })
           const json2 = await response.json()
           if (!response.ok) {
-            console.log("Something went wrong.")
+            console.log(json2.error)
           }
           if (response.ok) {
             setViolationName('')
