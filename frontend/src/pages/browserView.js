@@ -39,44 +39,17 @@ const BrowserView = ({student}) => {
     
         fetchViolations()
       }, [dispatchViolations]) 
-
-
-        const ViolationContainer = (props) => {
-            let violation = props.violation
-            let sid = props.studentid
-            const { dispatchViolations } = useViolationsContext()
             
-            const violationDelete = async (id) => {
-                const response = await fetch('/api/students/' + id + '/violations', {
-                    method: 'DELETE'
-                })
-                const json = await response.json()
-            
-                if (response.ok) {
-                    dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
-                }
-                }
-
-                console.log("sid " + sid)
-            //let studentid = student.studentID
-            let vid = violation.violationStudentID
-            
-            if (sid = vid) {
-                return (
-                    <div className="active-violation" key={violation._id}>
-                        <p><strong>Violation Name: </strong>{violation.violationName}</p>
-                        <p><strong>Details: </strong>{violation.violationInfo}</p>
-                        <p><strong>Date issued: </strong>{violation.violationDate}</p>
-                        <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
-                        <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
-                    </div>
-                )
-            } else if (sid != vid) {
-                <div>not same id</div>
+        const violationDelete = async (id) => {
+            const response = await fetch('/api/students/' + id + '/violations', {
+                method: 'DELETE'
+            })
+            const json = await response.json()
+        
+            if (response.ok) {
+                dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
             }
-        
         }
-        
         return (
             <div className="browser-view">
                 <div className="student-info-wrapper">
@@ -119,7 +92,13 @@ const BrowserView = ({student}) => {
                             <i className="fa-solid fa-plus fa-2x"></i>  
                         </div>
                         {violations && violations.map(violation => (
-                            <ViolationContainer violation={violation} studentid={student.studentID}></ViolationContainer>
+                            <div className="active-violation" key={violation._id}>
+                                <p><strong>Violation Name: </strong>{violation.violationName}</p>
+                                <p><strong>Details: </strong>{violation.violationInfo}</p>
+                                <p><strong>Date issued: </strong>{violation.violationDate}</p>
+                                <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
+                                <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
+                            </div>
                         ))}
                         
                     </div>
