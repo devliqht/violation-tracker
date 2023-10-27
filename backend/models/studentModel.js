@@ -13,7 +13,11 @@ const studentSchema = Schema({
     studentBlocksection: {
         type: String,
         required: true
-    }
+    },
+    violations: [{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Violation' 
+    }]
 }, { timestamps: true })
 
 module.exports = mongoose.model('Student', studentSchema)

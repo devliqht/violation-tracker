@@ -8,7 +8,6 @@ import { StudentsContext } from "../context/StudentsContext"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
-
 const BrowserView = ({student}) => {
     const { dispatchStudents } = useStudentsContext()
     const { violations, dispatchViolations } = useViolationsContext()
@@ -41,17 +40,43 @@ const BrowserView = ({student}) => {
         fetchViolations()
       }, [dispatchViolations]) 
 
-      const violationDelete = async (id) => {
-        const response = await fetch('/api/students/' + id + '/violations', {
-            method: 'DELETE'
-          })
-          const json = await response.json()
-      
-          if (response.ok) {
-            dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
-          }
-        }
 
+        const ViolationContainer = (props) => {
+            let violation = props.violation
+            let sid = props.studentid
+            const { dispatchViolations } = useViolationsContext()
+            
+            const violationDelete = async (id) => {
+                const response = await fetch('/api/students/' + id + '/violations', {
+                    method: 'DELETE'
+                })
+                const json = await response.json()
+            
+                if (response.ok) {
+                    dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
+                }
+                }
+
+                console.log("sid " + sid)
+            //let studentid = student.studentID
+            let vid = violation.violationStudentID
+            
+            if (sid = vid) {
+                return (
+                    <div className="active-violation" key={violation._id}>
+                        <p><strong>Violation Name: </strong>{violation.violationName}</p>
+                        <p><strong>Details: </strong>{violation.violationInfo}</p>
+                        <p><strong>Date issued: </strong>{violation.violationDate}</p>
+                        <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
+                        <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
+                    </div>
+                )
+            } else if (sid != vid) {
+                <div>not same id</div>
+            }
+        
+        }
+        
         return (
             <div className="browser-view">
                 <div className="student-info-wrapper">
@@ -94,14 +119,9 @@ const BrowserView = ({student}) => {
                             <i className="fa-solid fa-plus fa-2x"></i>  
                         </div>
                         {violations && violations.map(violation => (
-                            <div className="active-violation" key={violation._id}>
-                                <p><strong>Violation Name: </strong>{violation.violationName}</p>
-                                <p><strong>Details: </strong>{violation.violationInfo}</p>
-                                <p><strong>Date issued: </strong>{violation.violationDate}</p>
-                                <p>{formatDistanceToNow(new Date(student.createdAt), { addSuffix: true })}</p>
-                                <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
-                            </div>
+                            <ViolationContainer violation={violation} studentid={student.studentID}></ViolationContainer>
                         ))}
+                        
                     </div>
                 </div>
             </div>
@@ -153,24 +173,25 @@ const AddModalBrowserView = () => {
           setStudentName('')
           setStudentBlockSection('')
           dispatchStudents({type: 'CREATE_STUDENT', payload: json})
-          const violationData = { violationName, violationInfo, violationDate, violationStudentID }
+            const violationData = { violationName, violationInfo, violationDate, violationStudentID }
 
-          let idToBeStored = json._id;
-          const response = await fetch("/api/students/"+idToBeStored+"/violations", {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(violationData)
-          })
-          const json2 = await response.json()
-          if (!response.ok) {
-            console.log(json2.error)
-          }
-          if (response.ok) {
-            setViolationName('')
-            setViolationDate(currentDate)
-            setViolationInfo('')
-            dispatchViolations({type: 'CREATE_VIOLATION', payload: json2})
-          }
+            let idToBeStored = json._id;
+            console.log("")
+            const response = await fetch("/api/students/"+idToBeStored+"/violations", {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(violationData)
+            })
+            const json2 = await response.json()
+            if (!response.ok) {
+                console.log(json2.error)
+            }
+            if (response.ok) {
+                setViolationName('')
+                setViolationDate(currentDate)
+                setViolationInfo('')
+                dispatchViolations({type: 'CREATE_VIOLATION', payload: json2})
+            }
         }
       }
     return (

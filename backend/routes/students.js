@@ -14,25 +14,19 @@ const {
     deleteViolation
 } = require('../controllers/violationsController')
 
-const router = express.Router()
+const studentRouter = express.Router()
 
 // STUDENTS
 
 // GET all students
-router.get('/', getStudents)
+studentRouter.get('/', getStudents)
 // GET a single student
-router.get('/:id', getStudent)
+studentRouter.get('/:id', getStudent)
 // POST a new student
-router.post('/', createStudent)
+studentRouter.post('/', createStudent)
 // DELETE a student
-router.delete('/:id', deleteStudent)
+studentRouter.delete('/:id', deleteStudent)
 // UPDATE a student
-router.patch('/:id', updateStudent)
+studentRouter.patch('/:id', updateStudent)
 
-router.get('/:id/violations', getViolations)
-
-router.post('/:id/violations', createViolation)
-
-router.delete('/:id/violations', deleteViolation)
-
-module.exports = router
+module.exports = studentRouter

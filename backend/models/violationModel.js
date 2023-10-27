@@ -13,10 +13,6 @@ const violationSchema = Schema({
     violationDate: {
         type: String,
         required: true
-    },
-    violationStudentID: {
-        type: Number,
-        required: true
     }
 }, { timestamps: true })
 

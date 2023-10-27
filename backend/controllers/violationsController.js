@@ -10,6 +10,7 @@ const getViolations = async (req, res) => {
 
 // POST a new violation to a student
 const createViolation = async (req, res) => {
+
     const {violationName, violationInfo, violationDate, violationStudentID} = req.body
 
     // Add Violation to Database
