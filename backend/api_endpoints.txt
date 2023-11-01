@@ -8,3 +8,12 @@ PATCH /students/:id -> Updates a single student
 GET /students/:id/violations -> Gets a student's violations
 POST /students/:id/violations -> Creates a new violation on student
 
+GET /year/:id/students
+
+{ 
+    "year": 2023,
+    "_id": 2949036936,
+    students: [{
+        0: 
+    }]
+}

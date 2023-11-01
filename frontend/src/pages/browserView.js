@@ -55,31 +55,34 @@ const BrowserView = ({student}) => {
                 <div className="student-info-wrapper">
                     <div className="student-indicator">
                         <i className="fa-solid fa-user fa-2x"></i>  
-                        <p className="side-title"> / {student._id}</p>
+                        <p className="side-title"> {student.studentName} / {student._id}</p>
                         <button className="button-3" onClick={studentDelete}>delete</button>
                     </div>
 
                     <i className="fa-solid fa-user fa-6x" style={{color: 'var(--uscblue)', margin: '16px'}}></i>  
-                    <div className="student-detail-wrapper">
-                        <div className="student-detail-container">
-                            <h4>STUDENT NAME</h4>
+                    <div className="student-wrapper">
+                        <div className="student-detail-wrapper">
+                            <div className="student-detail-container">
+                                <h4>STUDENT NAME</h4>
+                            </div>
+                            <h2 className="student-name">{student.studentName}</h2>
                         </div>
-                        <h2 className="student-name">{student.studentName}</h2>
-                    </div>
 
-                    <div className="student-detail-wrapper">
-                        <div className="student-detail-container">
-                            <h4>STUDENT ID</h4>
+                        <div className="student-detail-wrapper">
+                            <div className="student-detail-container">
+                                <h4>STUDENT ID</h4>
+                            </div>
+                            <h2 className="student-name">{student.studentID}</h2>
                         </div>
-                        <h2 className="student-name">{student.studentID}</h2>
-                    </div>
 
-                    <div className="student-detail-wrapper">                
-                        <div className="student-detail-container">
-                            <h4>BLOCKSECTION</h4>
+                        <div className="student-detail-wrapper">                
+                            <div className="student-detail-container">
+                                <h4>BLOCKSECTION</h4>
+                            </div>
+                            <h2 className="student-name">{student.studentBlocksection}</h2>
                         </div>
-                        <h2 className="student-name">{student.studentBlocksection}</h2>
                     </div>
+    
                 </div>
                 <div className="violation-view">
                     <div className="violation-indicator">
@@ -93,11 +96,11 @@ const BrowserView = ({student}) => {
                         </div>
                         {violations && violations.map(violation => (
                             <div className="active-violation" key={violation._id}>
-                                <p><strong>Violation Name: </strong>{violation.violationName}</p>
+                                <h2>{violation.violationName}</h2>
                                 <p><strong>Details: </strong>{violation.violationInfo}</p>
                                 <p><strong>Date issued: </strong>{violation.violationDate}</p>
                                 <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
-                                <button className="material-symbols-outlined" onClick={() => { violationDelete(violation._id) }}>delete</button>
+                                <button className="button-3" onClick={() => { violationDelete(violation._id) }}>delete</button>
                             </div>
                         ))}
                         
