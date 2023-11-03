@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const Violation = require('../models/violationModel');
 const Student = require('../models/studentModel')
+const mongoose = require('mongoose')
 
 // Add a new violation to a specific student
 router.post('/', async (req, res) => {
@@ -69,5 +70,21 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
       }
   });
+
+  router.delete('/:id', async (req, res) => {
+    const violationID = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(violationID)) {
+      return res.status(404).json({error: 'No such violation exists'})
+    }
+
+    const violations = await Violation.findOneAndDelete({_id: violationID});
+
+    if (!violations) {
+        return res.status(404).json({error: 'No such violation exists'})
+    }
+  
+    res.status(200).json(violations)
+  })
 
 module.exports = router;

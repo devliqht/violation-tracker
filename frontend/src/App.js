@@ -40,9 +40,10 @@ function App() {
               <Route path="/" element={<Home />}/>
               <Route path="/students" element={<div className="view"><StudentView/></div>}/>
                   {students && students.map(student => (
-                    <Route path={"/students/"+student._id} element={<div className="view"><StudentView/><BrowserView student={student} key={student._id}/></div>}></Route>
+                    <Route path={"/students/"+student._id} element={<div className="view"><StudentView/><BrowserView student={student} key={student._id}/></div>}></Route>      
                   ))} 
-                    <Route path="/students/add" element={<div className="view"><StudentView/><AddModalBrowserView/></div>}></Route>
+              <Route path="/students/add" element={<div className="view"><StudentView/><AddModalBrowserView/></div>}></Route>
+              <Route path="/history" element={<div className="view"></div>}></Route>
             </Routes>
           </div>
       </div>

@@ -25,10 +25,13 @@ const SideNavbar = () => {
                 </div>
             </Link>
 
-            <div className="side-item" id="history-button">
-                <i className="fa-solid fa-clock-rotate-left fa-2x"></i>  
-                <p className="side-title">History</p>
-            </div>
+            <Link to="/history" style={{textDecoration: 'none', color: 'black'}}>
+                <div className="side-item" id="history-button">
+                    <i className="fa-solid fa-clock-rotate-left fa-2x"></i>  
+                    <p className="side-title">History</p>
+                </div>
+            </Link>
+
             <div className="side-item" id="export-button">
                 <i className="fa-solid fa-file-export fa-2x"></i>  
                 <p className="side-title">Export</p>

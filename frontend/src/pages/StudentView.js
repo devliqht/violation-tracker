@@ -9,10 +9,9 @@ const StudentDetails = ({student}) => {
     return (
         <Link to={"/students/"+student._id} style={{textDecoration: 'none', color: 'black'}}>
             <div className="students-details">
-                <h3 style={{'margin-bottom': '10px'}}>{student.studentName}</h3>
-                <p><strong>Student ID: </strong>{student.studentID}</p>
-                <p><strong>Blocksection: </strong>{student.studentBlocksection}</p>
-                <p>{formatDistanceToNow(new Date(student.createdAt), { addSuffix: true })}</p>
+                <h2 className="student-details-name">{student.studentName}</h2>
+                <p>{student.studentID}</p>
+                <p style={{color: 'var(--uscgreen)', textAlign: 'right'}}>{formatDistanceToNow(new Date(student.createdAt), { addSuffix: true })}</p>
             </div>
         </Link>
     )

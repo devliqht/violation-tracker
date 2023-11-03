@@ -3,6 +3,15 @@
   --uscblue: #009DDC;
   --uscred: #EE2E24;
   --uscyellow: #FFC423;
+
+  /* dark mode*/
+  --dbg: #000000;
+  --bg: #121212;
+  --fg: #232323;
+  --wdbg: #4D4D4D;
+  --wbg: #B2B2B2;
+  --wfg: #FFFFFF;
+
 }
 
 * {
@@ -18,12 +27,12 @@
 body {
   background-color: #ffffff;
   opacity: 0.8;
-  background-image: linear-gradient(#fafafa 2px, transparent 2px),
+  /*background-image: linear-gradient(#fafafa 2px, transparent 2px),
       linear-gradient(90deg, #fafafa 2px, transparent 2px),
       linear-gradient(#fafafa 1px, transparent 1px),
       linear-gradient(90deg, #fafafa 1px, #ffffff 1px);
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;*/
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

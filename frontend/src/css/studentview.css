@@ -1,13 +1,12 @@
 .student-view-wrapper {
     display: flex;
     flex-direction: row;
-    height: 90vh;
 }
 
 .student-navigation {
     display: flex;
     flex-direction: column;
-    border-right: 3px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
 }
 
 .student-search {
@@ -28,13 +27,24 @@
     color: var(--uscblue);
 }
 
+.student-action-button:hover {
+    text-shadow: 2px 2px 2px black;
+    transition: 0s;
+}
+
 .students-details {
+    display: flex;
+    flex-direction: column;
     background: #d9d9d969;
     margin: 10px;
     padding: 16px;
     font-family: 'Quicksand', sans-serif;
     border-radius: 8px;
     border: 2px solid #d9d9d9d1;
+}
+
+.student-details-name {
+    font-size: 1.2em;
 }
 
 .students-details:hover {
