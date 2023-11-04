@@ -41,7 +41,8 @@
     align-items: center;
     gap: 0.8em;
     margin: 16px;
-    padding: 16px;
+    padding: 12px;
+    justify-content: space-between;
     color: var(--uscgreen);
     font-family: 'Quicksand', sans-serif;
 }
