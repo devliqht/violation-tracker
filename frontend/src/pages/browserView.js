@@ -67,6 +67,30 @@ const BrowserView = ({student}) => {
                 dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
             }
         }
+
+        const SaveViolationData = async (event) => {
+            event.preventDefault();
+            const violationData = { violationName, violationInfo, violationDate }
+
+            let idToBeStored = student._id;
+            console.log("")
+            const response = await fetch("/api/students/"+idToBeStored+"/violations", {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(violationData)
+            })
+            const json2 = await response.json()
+            if (!response.ok) {
+                console.log(json2.error)
+            }
+            if (response.ok) {
+                setViolationName('')
+                setViolationDate(currentDate)
+                setViolationInfo('')
+                dispatchViolations({type: 'CREATE_VIOLATION', payload: json2})
+            }
+        }
+
         return (
             <div className="browser-view">
                 <div className="student-info-wrapper">
@@ -76,7 +100,7 @@ const BrowserView = ({student}) => {
                         <button className="b-red button-3" onClick={studentDelete}>Remove</button>
                     </div>
 
-                    <i className="fa-solid fa-user fa-6x" style={{color: 'var(--uscblue)', margin: '16px'}}></i>  
+                    <h1 className="student-information-title">Student Information</h1>
                     <div className="student-wrapper">
                         <div className="student-detail-wrapper">
                             <div className="student-detail-container">
@@ -99,6 +123,18 @@ const BrowserView = ({student}) => {
                             <h2 className="student-name">{student.studentBlocksection}</h2>
                         </div>
                     </div>
+                    <div className="offense-history">
+                        <h1>Offense History</h1>
+                            <div className="offense-list">
+                            {violations && violations.map(violation => (
+                                <div className="history-violation" key={violation._id}>
+                                    <h3>{violation.violationName}</h3>
+                                    <p><strong>Date issued: </strong>{violation.violationDate}</p>
+                                </div>
+                            ))}
+                            </div>
+                    </div>
+
     
                 </div>
                 <div className="violation-view">
@@ -120,8 +156,8 @@ const BrowserView = ({student}) => {
                         
                     </div>
                 </div>
-                <div className="add-violation-view">
-                    <div className="add-violation-indicator">
+                <form className="add-violation-view" onSubmit={SaveViolationData}>
+                    <div className="add-violation-indicator" >
                         <h2>Add Violation</h2>
                     </div>
                     <hr>
@@ -134,10 +170,30 @@ const BrowserView = ({student}) => {
                     options={violationArray}
                     inputValue={violationName} 
                     onInputChange={(event, newInputValue) => {setViolationName(newInputValue)}}
-                    renderInput={(params) => <TextField {...params} variant="filled" required label="Violation" />}
-                        />
+                    renderInput={(params) => <TextField {...params} variant="filled" required label="Select Violation" />}
+                    />
+
+                    <div className="nice-form-group">
+                        <label>Date of Violation/Offense Committed<span style={{color: 'var(--uscred)'}}> *</span></label>
+                        <input id="add-violation-date" 
+                        type="date" 
+                        value={violationDate} 
+                        required 
+                        onChange={(Event) => {setViolationDate(Event.target.value)}} />
+                    </div>
+
+                    <div className="nice-form-group" id="add-details-violation">
+                        <label>Details of Violation/Offense<span style={{color: 'var(--uscred)'}}> *</span></label>
+                        <textarea id="add-details-violation" 
+                        rows={5} 
+                        required 
+                        value={violationInfo} 
+                        onChange={(Event) => {setViolationInfo(Event.target.value)}} />
+                    </div> 
+
+                    <button id="submit-button" className="button-3" role="button" type="submit">Submit</button>
                    
-                </div>
+                </form>
             </div>
         )
 }

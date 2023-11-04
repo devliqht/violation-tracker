@@ -7,7 +7,17 @@ const TopNavbar = () => {
         <div className="top-navbar">
             <div className="menu-button">
                 <i className="fa-solid fa-bars fa-2x"></i>  
-            </div>    
+            </div> 
+
+            <h1 className="nav-title">Violation Tracker</h1>   
+            <div className="nav-links">
+                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>ISMIS</h3></a>
+                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>USC Website</h3></a>
+                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>USC Facebook Page</h3></a>
+                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>Contact</h3></a>
+                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>Help</h3></a>
+            </div>
+
             <Link to="/" style={{textDecoration: 'none'}}>
                 <img className="school-logo" src={SchoolLogo} alt="School Logo"></img>
             </Link>

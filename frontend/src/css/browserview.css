@@ -3,6 +3,7 @@
     flex-direction: row;
 }
 
+
 .browser-navigator {
     display: flex;
     flex-direction: row;
@@ -183,7 +184,7 @@
 .violation-detail-container {
     background: var(--uscred);
     border: 1px solid #d9d9d9;
-    font-family: 'Quicksand';
+    font-family: 'Poppins';
     padding: 10px;
     width: fit-content;
     font-weight: 100;
@@ -207,8 +208,8 @@
 .add-violation-view {
     display: flex;
     flex-direction: column;
-    background: var(--uscred);
-    border: 1px solid #b1b1b1;
+    background: #d9d9d9;
+    border: 1px solid var(--uscred);
     font-family: 'Quicksand';
     padding: 10px;
     border-radius: 10px;
@@ -218,11 +219,42 @@
 }
 
 .add-violation-indicator {
-    color: var(--wfg);
     display: flex;
     flex-direction: row;
     gap: 8px;
     padding: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.offense-history {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    font-family: 'Poppins', sans-serif;
+    gap: 0.5em;
+}
+
+.offense-list {
+    display: flex;
+    flex-direction: column;
+    background: #f6f6f6;
+    border: 1px solid #adadad;
+    border-radius: 12px;
+    padding: 12px;
+    gap: 0.7em;
+}
+
+.history-violation {
+    display: flex;
+    flex-direction: column;
+    background: var(--uscyellow);
+    border: 1px solid var(--uscgreen);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.student-information-title {
+    margin-left: 16px;
+    font-family: 'Lexend', sans-serif;
 }
