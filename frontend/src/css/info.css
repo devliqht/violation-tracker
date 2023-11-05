@@ -1,0 +1,39 @@
+.info {
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 6em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.container h1 {
+    font-family: 'Poppins';
+}
+
+.container h3 {
+    font-family: 'Quicksand';
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.sub-container h4 {
+    font-family: 'Lexend';
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+.links a {
+    text-decoration: none;
+    color: var(--uscgreen);
+    font-family: 'Lexend';
+}

@@ -11,7 +11,8 @@
 }
 
 .student-search {
-    border: 2px solid var(--uscgreen);
+    border: 2px solid var(--wbg);
+    border-radius: 12px;
     padding: 16px;
     margin: 10px;
     width: 256px;

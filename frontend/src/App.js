@@ -4,11 +4,13 @@ import { useEffect } from "react"
 import { useStudentsContext } from './hooks/useStudentsContext';
 import { StudentsContext } from './context/StudentsContext';
 
+
 // Pages and Components
 import Home from './pages/home';
 import { TopNavbar, SideNavbar } from './components/navbar';
 import { StudentView } from './pages/StudentView';
 import { BrowserView, AddModalBrowserView } from './pages/browserView';
+import { InfoView } from './pages/info';
 
 function App() {
   const { students, dispatchStudents } = useStudentsContext()
@@ -44,6 +46,7 @@ function App() {
                   ))} 
               <Route path="/students/add" element={<div className="view"><StudentView/><AddModalBrowserView/></div>}></Route>
               <Route path="/history" element={<div className="view"></div>}></Route>
+              <Route path="/info" element={<div className="view"><InfoView></InfoView></div>}></Route>
             </Routes>
           </div>
       </div>

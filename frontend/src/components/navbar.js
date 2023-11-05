@@ -80,10 +80,13 @@ const SideNavbar = () => {
                 <i className="fa-solid fa-gear fa-2x"></i>  
                 <p className="side-title">Settings</p>
             </div>
-            <div className="side-item" id="info-button">
-                <i className="fa-solid fa-circle-question fa-2x"></i>  
-                <p className="side-title">Info</p>
-            </div>
+            <Link to="/info" style={{textDecoration: 'none', color: 'black'}}>
+                <div className="side-item" id="info-button">
+                    <i className="fa-solid fa-circle-question fa-2x"></i>  
+                    <p className="side-title">Info</p>
+                </div>
+            </Link>
+
         </div>
     )
 }

@@ -1,8 +1,9 @@
 :root {
-  --uscgreen: #00A950;
+  --uscgreen: #0E3C00;
   --uscblue: #009DDC;
   --uscred: #EE2E24;
   --uscyellow: #FFC423;
+  --border: #B7B01D;
 
   /* dark mode*/
   --dbg: #000000;
