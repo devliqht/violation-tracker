@@ -4,6 +4,7 @@ import Profile from './../assets/profile.png'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+const google = window.google;
 
 const TopNavbar = () => {
     const [ time, setTime ] = useState('');
@@ -37,8 +38,6 @@ const TopNavbar = () => {
 
     return (
         <div className="top-navbar">
-            
-
             <div className="menu-button">
                 <i className="fa-solid fa-bars fa-2x"></i>  
             </div> 
