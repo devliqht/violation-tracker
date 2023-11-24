@@ -1,12 +1,15 @@
-import './../css/home.css'
+import './../css/home.css';
+import { useEffect } from "react";
+import { jwtDecode } from "jwt-decode"
+
 
 const Home = () => {
     return (
         <div className="home">
-            <h1 className="title">Welcome to the OSA Violation Tracker</h1>
-            <p>The OSA Violation Tracker is a program created by:</p>
-            <p><strong>Matt Erron G. Cabarrubias</strong>, <strong>Faye Akbar</strong></p>
-            <p>STEM 12 - ST</p>
+            <h1 className="title">
+                Welcome to the OSA Violation Tracker
+            </h1>
+            <div id="g-sign-in"></div>
         </div>
     )
 }

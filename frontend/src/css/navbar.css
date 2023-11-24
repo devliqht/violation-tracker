@@ -4,7 +4,7 @@
     width: 100%;
     border-bottom: 1px solid var(--border);
     align-items: center;
-    gap: 1.2em;
+    gap: 10px;
 }
 
 .nav-title {
@@ -19,6 +19,21 @@
 
 }
 
+.g-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.g-img {
+    max-width: 32px;
+}
+
+.g-name {
+    color: black;
+}
 .date-and-time {
     font-family: 'Quicksand', sans-serif;
     width: 210px;

@@ -3,9 +3,11 @@ import SchoolLogo from './../assets/reportheader1.png'
 import Profile from './../assets/profile.png'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const TopNavbar = () => {
     const [ time, setTime ] = useState('');
+    const [ user, setUser ] = useState({});
     useEffect(() => {
         const interval = setInterval(() => {
           setTime(new Date().toLocaleString());
@@ -13,6 +15,25 @@ const TopNavbar = () => {
     
         return () => clearInterval(interval);
       }, []);
+
+      function handleCallbackResponse (response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+        var userObject = jwtDecode(response.credential);
+        console.log(userObject);
+        setUser(userObject);
+    }
+
+        useEffect(() => {
+            google.accounts.id.initialize({
+                client_id: "177566154177-2qtgppuanma1jp9gum8lblaiu7lmevhh.apps.googleusercontent.com",
+                callback: handleCallbackResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("g-sign-in"),
+                { theme: "outline", size: "large"}
+            )
+        }, []);
 
     return (
         <div className="top-navbar">
@@ -26,17 +47,22 @@ const TopNavbar = () => {
             <Link to="/" style={{textDecoration: 'none'}}>
                 <img className="school-logo" src={SchoolLogo} alt="School Logo"></img>
             </Link>
-            <h1 className="nav-title">Violation Tracker</h1>   
+            <div id="g-sign-in"></div>   
             <h3 className="date-and-time">{time}</h3>
             <div className="nav-links">
                 <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F' style={{borderLeft: '1px solid #d9d9d9'}}><h3>ISMIS</h3></a>
                 <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>USC Website</h3></a>
-                <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>USC Facebook Page</h3></a>
                 <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>Contact</h3></a>
                 <a href='https://ismis.usc.edu.ph/Account/Login?ReturnUrl=%2F'><h3>Help</h3></a>
             </div>
-
-            <h3 className="db-indicator"><code>Database Connection 200 OK</code></h3>
+            { user && 
+                <div className="g-details">
+                    <img className="g-img" src={user.picture}></img>
+                    <code>
+                        <h3 className="g-name">{user.name}</h3>    
+                    </code>
+                </div>
+            }
 
         </div>
     )

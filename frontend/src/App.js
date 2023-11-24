@@ -31,6 +31,7 @@ function App() {
     fetchStudents()
   }, [dispatchStudents])
 
+  let isUnlocked = 0;
   return (
     <div className="App">
       <BrowserRouter>
