@@ -15,12 +15,15 @@ app.use((req, res, next) => {
 app.use('/api/students', studentRoutes)
 app.use('/api/students/:id/violations', violationRoutes)
 
+app.get('/', (req, res) => {
+    res.send("please work im going insane");
+})
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // Listen for requests
-        app.listen(process.env.PORT, () => {
+        app.listen(process.env.PORT || 8000, () => {
             console.log('Connected! Listening on port ', process.env.PORT)
         }) 
     })

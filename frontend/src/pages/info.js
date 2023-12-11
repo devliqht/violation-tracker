@@ -136,7 +136,10 @@ const InfoView = () => {
 
             </div>
             
-            
+            <div className='container'>
+                <h1>VERSION</h1>
+                <h3>0.5.6</h3>
+            </div>
         </div>
 
     )
