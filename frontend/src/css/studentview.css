@@ -8,6 +8,8 @@
     flex-direction: column;
     border-right: 1px solid #d9d9d9;
     background: var(--wdfg);
+    padding: 12px;
+    width: 20em;
 }
 
 .student-search {

@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const studentRoutes = require('./routes/students')
@@ -20,11 +19,11 @@ app.get('/', (req, res) => {
 })
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect("mongodb+srv://ayerinmattxc:g3YR6DvjayVOECYS@violationtracker.fpqujlc.mongodb.net/?retryWrites=true&w=majority")
     .then(() => {
         // Listen for requests
         app.listen(process.env.PORT || 8000, () => {
-            console.log('Connected! Listening on port ', process.env.PORT)
+            console.log('fr Connected! Listening on port 8000')
         }) 
     })
     .catch((error) => {

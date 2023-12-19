@@ -11,11 +11,11 @@ const getViolations = async (req, res) => {
 // POST a new violation to a student
 const createViolation = async (req, res) => {
 
-    const {violationName, violationInfo, violationDate, violationStudentID} = req.body
+    const {violationName, violationInfo, violationDate, violationStatus} = req.body
 
     // Add Violation to Database
     try {
-        const violation = await Violation.create({violationName, violationInfo, violationDate, violationStudentID})
+        const violation = await Violation.create({violationName, violationInfo, violationDate, violationStatus})
         res.status(200).json(violation)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -39,8 +39,26 @@ const deleteViolation = async (req, res) => {
 
 }
 
+const updateViolation = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such violation exists 1'})
+    }
+
+    const violation = await Violation.findOneAndUpdate({_id: id}, {
+      ...req.body  
+    })
+
+    if (!violation) {
+        return res.status(404).json({error: 'No such violation exists 2'})
+    }
+
+    res.status(200).json(violation)
+} 
+
 module.exports = {
     getViolations,
     createViolation,
-    deleteViolation
+    deleteViolation,
+    updateViolation
 }

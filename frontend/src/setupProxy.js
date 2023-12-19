@@ -4,8 +4,10 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:4000',
+      target: 'https://sound-service-407812.as.r.appspot.com',
       changeOrigin: true,
     })
   );
 };
+
+//https://sound-service-407812.as.r.appspot.com

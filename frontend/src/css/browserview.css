@@ -83,6 +83,8 @@
   .b-red:hover {
     background-color: #972c2c !important;
   }
+
+
   .button-3 {
     appearance: none;
     background-color: var(--uscgreen);
@@ -162,10 +164,8 @@
     flex-direction: column;
     background: #d9d9d967;
     border: 1px solid #b1b1b1;
+    border-top: none;
     font-family: 'Quicksand';
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px;
     width: 100%;
 }
 
@@ -207,17 +207,18 @@
     border-radius: 8px;
 }
 
+.active-violation h3 {
+
+}
+
 .add-violation-view {
     display: flex;
     flex-direction: column;
     background: #d9d9d9;
-    border: 1px solid var(--uscred);
     font-family: 'Quicksand';
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px;
     width: 100%;
     gap: 0.4em;
+    padding: 10px;
 }
 
 .add-violation-indicator {
@@ -259,4 +260,15 @@
 .student-information-title {
     margin-left: 16px;
     font-family: 'Lexend', sans-serif;
+}
+
+.violation-action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.violation-action-buttons p {
+    color: var(--uscgreen);
 }

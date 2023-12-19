@@ -40,9 +40,7 @@ const StudentView = () => {
         <div className="student-view-wrapper">
             <div className="student-navigation">
 
-                <div className="student-search-container">
-                    <input className="student-search" type="text" placeholder="Search.."></input>
-                </div>
+
                 <div className="student-action-buttons">
                     <Link to="/students/add" style={{textDecoration: 'none', color: 'black'}}>
                         <div className="student-action-button" id="students-add-button">

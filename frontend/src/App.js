@@ -11,6 +11,7 @@ import { TopNavbar, SideNavbar } from './components/navbar';
 import { StudentView } from './pages/StudentView';
 import { BrowserView, AddModalBrowserView } from './pages/browserView';
 import { InfoView } from './pages/info';
+import { History } from './pages/history';
 
 function App() {
   const { students, dispatchStudents } = useStudentsContext()
@@ -40,13 +41,13 @@ function App() {
         <SideNavbar />
           <div className="content">
             <Routes>
-              <Route path="/" element={<Home />}/>
+              <Route path="/" element={<div className="view"><StudentView/></div>}/>
               <Route path="/students" element={<div className="view"><StudentView/></div>}/>
                   {students && students.map(student => (
                     <Route path={"/students/"+student._id} element={<div className="view"><StudentView/><BrowserView student={student} key={student._id}/></div>}></Route>      
                   ))} 
               <Route path="/students/add" element={<div className="view"><StudentView/><AddModalBrowserView/></div>}></Route>
-              <Route path="/history" element={<div className="view"></div>}></Route>
+              <Route path="/history" element={<div className="view"><History student={students}></History></div>}></Route>
               <Route path="/info" element={<div className="view"><InfoView></InfoView></div>}></Route>
             </Routes>
           </div>

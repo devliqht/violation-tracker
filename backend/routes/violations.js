@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
       violationName: req.body.violationName,
       violationInfo: req.body.violationInfo,
       violationDate: req.body.violationDate,
+      violationStatus: req.body.violationStatus,
       // Other fields as needed
     });
     // Save the violation to the student's document in the database
@@ -26,6 +27,7 @@ router.post('/', async (req, res) => {
     }
     student.violations.push(violation);
     await student.save();
+
     res.status(201).json(violation);
   } catch (err) {
     console.error(err);
@@ -72,7 +74,25 @@ router.get('/', async (req, res) => {
     if (!violations) {
         return res.status(404).json({error: 'No such violation exists'})
     }
-  
+    
+    res.status(200).json(violations)
+  })
+
+  router.patch('/:id', async (req, res) => {
+    const violationID  = req.params.id;
+    const body = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(violationID)) {
+        return res.status(404).json({error: 'No such violation exists 1 patch'})
+    }
+
+
+    const violations = await Violation.findOneAndUpdate({_id: violationID}, { ...req.body }, {new: true})
+
+    if (!violations) {
+        return res.status(404).json({error: 'No such violation exists 2'})
+    }
+
     res.status(200).json(violations)
   })
 

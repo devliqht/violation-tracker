@@ -13,6 +13,70 @@ import Box from '@mui/material/Box';
 
 import { violationArray } from '../components/violations'
 
+const ViolationInfo = (props) => {
+    const studentID = props.studentID;
+    const violation = props.violation;
+    const { violations, dispatchViolations } = useViolationsContext()
+
+    const violationDelete = async (id) => {
+        const response = await fetch('/api/students/' + studentID + '/violations/' + id, {
+            method: 'DELETE'
+        })
+        const json = await response.json()
+    
+        if (response.ok) {
+            dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
+        }
+    }
+    
+    const [violationStatus, setViolationStatus] = useState(violation.violationStatus)
+    const [editStatus, setEditStatus] = useState(false);
+
+    const violationUpdate = async (id) => {
+        console.log(studentID);
+        const jViolationStatus = { violationStatus }
+        const response = await fetch('/api/students/' + studentID + '/violations/' + id, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(jViolationStatus)
+        })
+        const json = await response.json()
+    
+        if (response.ok) {
+            console.log("Successfully patched violation " + id + " with new status: " + violationStatus)
+        }
+    }
+    return (
+        <div className="active-violation" key={violation._id}>
+            <h3>{violation.violationName}</h3>
+            <p><strong>STATUS: </strong><span style={{color: 'var({--uscred})'}}>{violationStatus}</span></p>
+            <p><strong>Details: </strong>{violation.violationInfo}</p>
+            <p><strong>Date issued: </strong>{violation.violationDate}</p>
+            
+            <div className="violation-action-buttons">
+                <button className="button-3" onClick={() => { setEditStatus(true) }}>Edit Status</button> 
+                <button className="b-red button-3" onClick={() => { violationDelete(violation._id) }}>Remove</button>
+                <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
+            </div>
+            {editStatus && 
+            <div className="violation-edit-status">
+                <div className="nice-form-group" id="add-details-violation">
+                            <label>Edit Status</label>
+                            <textarea id="add-details-violation" 
+                            rows={1} 
+                            required 
+                            value={violationStatus} 
+                            onChange={(Event) => {setViolationStatus(Event.target.value)}} />
+                </div>
+                <button className="button-3" onClick={() => { violationUpdate(violation._id); setEditStatus(false) }}>Apply</button> 
+                <button className="b-red button-3" onClick={() => { setEditStatus(false) }}>Close</button> 
+            </div>
+
+            }
+            
+        </div>
+    )
+}
 const BrowserView = ({student}) => {
     const date = new Date();
     let day = date.getDate();
@@ -57,20 +121,12 @@ const BrowserView = ({student}) => {
         fetchViolations()
       }, [dispatchViolations]) 
             
-        const violationDelete = async (id) => {
-            const response = await fetch('/api/students/' + student._id + '/violations/' + id, {
-                method: 'DELETE'
-            })
-            const json = await response.json()
-        
-            if (response.ok) {
-                dispatchViolations({type: 'DELETE_VIOLATION', payload: json})
-            }
-        }
+
 
         const SaveViolationData = async (event) => {
             event.preventDefault();
-            const violationData = { violationName, violationInfo, violationDate }
+            let violationStatus = "UNRESOLVED";
+            const violationData = { violationName, violationInfo, violationDate, violationStatus }
 
             let idToBeStored = student._id;
             console.log("")
@@ -90,7 +146,6 @@ const BrowserView = ({student}) => {
                 dispatchViolations({type: 'CREATE_VIOLATION', payload: json2})
             }
         }
-
         return (
             <div className="browser-view">
                 <div className="student-info-wrapper">
@@ -123,17 +178,7 @@ const BrowserView = ({student}) => {
                             <h2 className="student-name">{student.studentBlocksection}</h2>
                         </div>
                     </div>
-                    <div className="offense-history">
-                        <h1>Offense History</h1>
-                            <div className="offense-list">
-                            {violations && violations.map(violation => (
-                                <div className="history-violation" key={violation._id}>
-                                    <h3>{violation.violationName}</h3>
-                                    <p><strong>Date issued: </strong>{violation.violationDate}</p>
-                                </div>
-                            ))}
-                            </div>
-                    </div>
+
 
     
                 </div>
@@ -144,14 +189,8 @@ const BrowserView = ({student}) => {
                     <hr></hr>
                     <div className="violation-detail-wrapper">
                         {violations && violations.map(violation => (
-                            <div className="active-violation" key={violation._id}>
-                                <h3>{violation.violationName}</h3>
-                                <p>{violation._id}</p>
-                                <p><strong>Details: </strong>{violation.violationInfo}</p>
-                                <p><strong>Date issued: </strong>{violation.violationDate}</p>
-                                <p>{formatDistanceToNow(new Date(violation.createdAt), { addSuffix: true })}</p>
-                                <button className="b-red button-3" onClick={() => { violationDelete(violation._id) }}>Remove</button>
-                            </div>
+                            <ViolationInfo studentID={student._id} violation={violation}></ViolationInfo>
+                            
                         ))}
                         
                     </div>
@@ -243,7 +282,8 @@ const AddModalBrowserView = () => {
           setStudentName('')
           setStudentBlockSection('')
           dispatchStudents({type: 'CREATE_STUDENT', payload: json})
-            const violationData = { violationName, violationInfo, violationDate, violationStudentID }
+          let violationStatus = "UNRESOLVED";
+            const violationData = { violationName, violationInfo, violationDate, violationStatus }
 
             let idToBeStored = json._id;
             console.log("")
