@@ -4,10 +4,11 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://sound-service-407812.as.r.appspot.com',
+      target: 'https://violation-tracker-api.onrender.com',
       changeOrigin: true,
     })
   );
 };
 
+//https://violation-tracker-api.onrender.com/
 //https://sound-service-407812.as.r.appspot.com
