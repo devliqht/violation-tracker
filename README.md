@@ -8,4 +8,4 @@ A special project passed to my CFP (Computer Fundamentals and Programming) 01 el
 
 
 ## Notes
-- This is everything in the folder, and it does not contain a ``.gitignore`` file. This was meant to be a collaboration repo, a way to access the folder from two devices simultaneously without having the hassle of reinstalling packages. Although it could've worked another way, I just preferred to had it this way. 
+- This is everything in the folder, and it does not contain a ``.gitignore`` file. ``.env`` files are also here as well as client IDs. This was meant to be a collaboration repo, a way to access the folder from two devices simultaneously without having the hassle of reinstalling packages. Although it could've worked another way, I just preferred to had it this way. 
